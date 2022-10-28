@@ -23,8 +23,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Git Tag Based Build Version
-      # You may pin to the exact commit or the version.
-      # uses: happygears/gt2v@9f275080ddb0d1b326f90cec7ab06e0821c3ab49
       uses: happygears/gt2v@v2
     - name: Setup NuGet.exe for use with Actions
       uses: NuGet/setup-nuget@v1.1.1
@@ -37,7 +35,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build $BUILD_CONFIG -p:Version=$BUILD_VERSION --no-restore
+      run: dotnet build $BUILD_CONFIG --no-restore
     - name: Publish
       if: startsWith(github.ref, 'refs/heads/release')
       run: nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
