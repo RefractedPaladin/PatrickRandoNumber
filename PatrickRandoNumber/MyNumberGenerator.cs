@@ -1,4 +1,6 @@
-﻿namespace PatrickRandoNumber
+﻿using System.Xml.Linq;
+
+namespace PatrickRandoNumber
 {
     public class MyNumberGenerator
     {
@@ -17,6 +19,8 @@
 
         public int WhatsMyNumberByColor(string knownColor)
         {
+            if (knownColor == null || knownColor.Length == 0) throw new ArgumentNullException("knownColor");
+            if (knownColor == "Huh") throw new ArgumentException("color can't be huh!");
             var results = 0;
 
             var lengthOfColor = knownColor.Length;
