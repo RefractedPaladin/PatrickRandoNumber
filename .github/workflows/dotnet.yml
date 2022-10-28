@@ -2,16 +2,17 @@
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
 name: .NET
-
 on:
-  workflow_dispatch:
-  create:
-    branches: 
-      - release/**
+  workflow_dispatch:    # Allow running the workflow manually from the GitHub UI
   push:
-    branches: [ "master" ]
+    branches:
+      - 'master'       # Run the workflow when pushing to the main branch
   pull_request:
-    branches: [ "master" ]
+    branches:
+      - '*'          # Run the workflow for all pull requests
+  release:
+    types:
+      - published    # Run the workflow when a new GitHub release is published
 
 jobs:
   build:
@@ -37,5 +38,5 @@ jobs:
       # uses: EasyDesk/action-dotnet-build@d2c47d8701e3ea8db03dcabaacb37204fe123a22
       uses: EasyDesk/action-dotnet-build@v1.0.0
     - name: Publish
-      if: startsWith(github.ref, 'refs/heads/release')
+      if: github.event_name == 'release'
       run: nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
