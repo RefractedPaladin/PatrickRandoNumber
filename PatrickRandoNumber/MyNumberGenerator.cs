@@ -24,6 +24,16 @@
             results = randoGen.Next(lengthOfColor * 3);
             return results;
         }
+
+        public int WhatsMyNumberByDay(string dayOfWeek)
+        {
+            var results = 0;
+
+            var lengthOfWeek = dayOfWeek.Length;
+            var randoGen = new Random();
+            results = randoGen.Next(lengthOfWeek * 3);
+            return results;
+        }
     }
 
 }
