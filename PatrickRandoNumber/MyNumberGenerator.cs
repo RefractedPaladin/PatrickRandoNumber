@@ -31,6 +31,7 @@ namespace PatrickRandoNumber
 
         public int WhatsMyNumberByDay(string dayOfWeek)
         {
+            // Huh
             var results = 0;
 
             var lengthOfWeek = dayOfWeek.Length;
